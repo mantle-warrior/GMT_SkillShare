@@ -1,55 +1,84 @@
 #!/bin/bash
-fig_name=figure2
-fig_fmt=pdf
+fig_name=GMT_compleFig
+fig_fmt=png
 gmt begin $fig_name $fig_fmt
 
 gmt set FONT_ANNOT_PRIMARY=12
-# gmt set FONT_ANNOT_PRIMARY=times-roman
-gmt set MAP_FRAME_TYPE=plain
+gmt set FONT_ANNOT_PRIMARY=times-roman
+gmt set MAP_FRAME_TYPE=fancy
 gmt set COLOR_BACKGROUND=white
 gmt set FORMAT_GEO_MAP ddd:mm:ssF
 
-# inf=/Volumes/jie/data_project/topo_global/GEBCO_2014_2D.nc
-# gradf=/Volumes/jie/data_project/topo_global/grad_GEBCO_2014_2D-0.8.nc
-inf2=/Users/jiechen/onedrive/data_project/topo_global/ship_bathymetry0.027m.nc
-gradf2=/Users/jiechen/onedrive/data_project/topo_global/grad_ship_bathymetry0.027m_0.4.nc
-# inf2=/Volumes/jie/data_project/topo_global/ship_bathymetryboite_ouest_49_5230.grd
-# grad2=/Volumes/jie/data_project/topo_global/grad_ship_bathymetryboite_ouest_49_5230.nc
+inf=/Users/jiechen/OneDrive/data_project/topo_global/earth_relief_05m.grd
+gradf=/Users/jiechen/OneDrive/data_project/topo_global/grad_relief_05m-0.3.nc
+gmt grdgradient $inf -A45 -Nt0.3 -fg -G$gradf -V
 
-# gmt grdgradient $inf -A135/135 -Nt0.4 -fg -G$gradf -V
-gmt grdgradient $inf2 -A135 -Nt0.4 -fg -G$gradf2 -V
-# gmt grdgradient $inf3 -A45 -Nt0.5 -fg -G$gradf3 -V
+incpt=wysiwyg
+cptf=SWIR.cpt
+gmt makecpt -C$incpt -T-7000/0/1400 -D -V -F -Z > $cptf
 
-incpt=haxby
-cptf=longqi.cpt
-# gmt makecpt -C$incpt -T-3700/-900/400 -D -V -F -Z > $cptf
-
-R=49.4/50.05/-37.96/-37.55
-# R=49.59/49.815/-37.845/-37.7
+R=8/75/-57/-21
 J=M20c
-# gmt grdimage $inf -I$gradf -R$R -J$J -C$cptf  -Bxa20mf5m -Bya20mf5m -Q -V
-gmt grdimage $inf2 -I$gradf2 -R$R -J$J -Clongqi-bathy.cpt -V -Q -Bx10mf5m -Bya5mf5m -BWseN
-# gmt grdimage $inf3 -I$gradf3 -R$R -J$J -C$cptf -V -Q
-#--MAP_ANNOT_OFFSET_PRIMARY=0.3 --MAP_TICK_LENGTH=0.2
-gmt psscale -C$cptf -Ba500/:"  Depth (m)": -D4/-0.5/8/0.4h --MAP_FRAME_PEN=0.5p --MAP_TICK_LENGTH=0.15 --MAP_ANNOT_OFFSET_PRIMARY=0.1  -I -V
-gmt basemap -Lfx15/-0.5/-38/5+u  -V
+gmt grdimage $inf -I$gradf -R$R -J$J -CSWIR.cpt -V -Q -Bx10f5 -Bya10f5 -BWseN
+gmt coast -Sgray -A0 -t70 -V
+gmt psscale -C$cptf -Ba2000f1000/:"  Depth (m)": -D4/-0.5/8/0.4h --MAP_FRAME_PEN=0.5p --MAP_TICK_LENGTH=0.15 --MAP_ANNOT_OFFSET_PRIMARY=0.1  -I -V
+gmt basemap -Lfx15/-0.5/-38/500+u  -V
+gmt coast -Ggray -A1000 
 
-gmt psxy /Users/jiechen/onedrive/data_project/segment/28.txt  -W3p,white+s
-gmt psxy /Users/jiechen/onedrive/data_project/segment/28O.txt  -W3p,white+s
-gmt psxy GPS_vent.txt -Sa20p -W0.8p,white -Gred -V
-# gmt psxy block_AL.txt  -W0.5p,yellow -L -V
+gmt psxy ridge/SWIR.txt    -Wthicker+s
+gmt psxy ridge/SEIR.txt    -Wthicker+s
+gmt psxy ridge/CIR.txt    -Wthicker+s
+ 
+gmt psxy SWIR_TF/10E_Shaka.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/25E_Du_Toit.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/32.4E_Andrew_Bain.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/33.9E_Marion.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/35.2E_Prince_Edward.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/39.3E_Eric_Simpson.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/40.7E_Discovery2.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/46.1E_Indomed.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/52.3EGallieni.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/57E_Atlantis2.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/60.7E_Melville.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/RTJ-north-trace.txt -Wthicker,darkgray,4_4_4_4:3p+s  
+gmt psxy SWIR_TF/RTJ-south-trace.txt -Wthicker,darkgray,4_4_4_4:3p+s 
 
-# gmt psxy block_C.txt  -W0.5p -L
-# gmt psxy block_A.txt  -W0.5p -L
-gmt psxy block_AL.txt  -W0.5p,yellow -L
+gmt psxy hydrothermal/hydrothermal_anomaly.txt -Sc10p -W0.2p,white -Gblue
+gmt psxy hydrothermal/hydrothermal_vent.txt  -Sc10p -W0.2p,white -Gred
+echo 55.5 -51 > legend
+echo 55.5 -57 >> legend
+echo 75 -57 >> legend
+echo 75 -51 >> legend
+gmt psxy legend -W1p,black -Gwhite  -L -A
 
-# gmt pstext rock_AL-2.txt -F+f12,Times-Roman -D0/0.3
-gmt psxy rock_AL-2.txt  -Sc8p -Gblack -W0.3p,white
+echo 56.5 -52 > ridge.legend
+echo 59.5 -52 >> ridge.legend
+gmt psxy ridge.legend -Wthicker
+echo 59.5 -52 ridge | gmt pstext -F+f12+jLM  -D0.3c/0c
 
-# gmt psxy /Volumes/jie/data_project/vent/contract_vent_anomaly20180426.txt -Sc0.5c -Gblack -V
+echo 56.5 -53 > TF.legend 
+echo 59.5 -53 >> TF.legend
+gmt psxy TF.legend -Wthicker,darkgray
+echo 59.5 -53 transfrom fracture | gmt pstext -F+f12+jLM  -D0.3c/0c
 
-# gmt psxy area.txt -W2p,red  -A -L -V
-# gmt psconvert
-# gmt clear conf
+echo 56.5 -54 > RTJtrace.legend 
+echo 59.5 -54 >> RTJtrace.legend
+gmt psxy RTJtrace.legend -Wthicker,darkgray,4_4_4_4:3p+s 
+echo 59.5 -54 RTJ trace | gmt pstext -F+f12+jLM  -D0.3c/0c
+
+echo 58 -55 | gmt psxy -Sc10p -W0.2p,white -Gblue
+echo 59.5 -55 hydrothermal anomaly | gmt pstext -F+f12+jLM  -D0.3c/0c
+echo 58 -56 | gmt psxy -Sc10p -W0.2p,white -Gred
+echo 59.5 -56 hydrothermal vent | gmt pstext -F+f12+jLM  -D0.3c/0c
+rm legend ridge.legen TF.legend RTJtrace.legend
+
+gmt pscoast -R-60/300/-90/90 -JG55/-40/6c -A20000 -W0.1p -Gblack -Swhite -Ba30g -V -Y8.25c
+gmt psxy  ridge/SWIR.txt -W0.5p+s -V
+gmt psxy  ridge/SEIR.txt -W0.5p+s -V
+gmt psxy  ridge/CIR.txt -W0.5p+s -V
+gmt psxy  ridge/AAR.txt -W0.5p+s -V
+gmt psxy  ridge/slow.txt -W0.5p+s -V
+echo 50.1 -37.7| gmt psxy -Sa15p -W0.1p,red -Gred -V
+
 gmt end
 open ${fig_name}.${fig_fmt}
