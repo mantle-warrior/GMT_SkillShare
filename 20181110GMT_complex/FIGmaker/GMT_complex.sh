@@ -25,9 +25,9 @@ gmt psscale -C$cptf -Ba2000f1000/:"  Depth (m)": -D4/-0.5/8/0.4h --MAP_FRAME_PEN
 gmt basemap -Lfx15/-0.5/-38/500+u  -V
 gmt coast -Ggray -A1000 
 
-gmt psxy ridge/SWIR.txt    -Wthicker+s
-gmt psxy ridge/SEIR.txt    -Wthicker+s
-gmt psxy ridge/CIR.txt    -Wthicker+s
+gmt psxy ridge/SWIR.txt  -Wthicker+s
+gmt psxy ridge/SEIR.txt  -Wthicker+s
+gmt psxy ridge/CIR.txt   -Wthicker+s
  
 gmt psxy SWIR_TF/10E_Shaka.txt -Wthicker,darkgray+s  
 gmt psxy SWIR_TF/25E_Du_Toit.txt -Wthicker,darkgray+s  
