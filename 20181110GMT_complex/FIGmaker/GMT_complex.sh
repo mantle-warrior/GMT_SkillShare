@@ -25,7 +25,6 @@ gmt coast -Sgray -A0 -t70 -V
 gmt psscale -C$cptf -Ba2000f1000/:"  Depth (m)": -D4/-0.5/8/0.4h --MAP_FRAME_PEN=0.5p --MAP_TICK_LENGTH=0.15 --MAP_ANNOT_OFFSET_PRIMARY=0.1  -I -V
 gmt basemap -Lfx15/-0.5/-38/500+u  -V
 gmt coast -Ggray -A1000 
-gmt end 
 
 gmt psxy ridge/SWIR.txt  -Wthicker+s
 gmt psxy ridge/SEIR.txt  -Wthicker+s
@@ -47,6 +46,13 @@ gmt psxy SWIR_TF/RTJ-south-trace.txt -Wthicker,darkgray,4_4_4_4:3p+s
 
 gmt psxy hydrothermal/hydrothermal_anomaly.txt -Sc10p -W0.2p,white -Gblue
 gmt psxy hydrothermal/hydrothermal_vent.txt  -Sc10p -W0.2p,white -Gred
+echo 43 -40.5 > area
+echo 43 -41.5 >> area
+echo 45 -41.5 >> area
+echo 45 -40.5 >> area
+gmt psxy area -Gred  -L -A
+rm area
+gmt end
 echo 55.5 -51 > legend
 echo 55.5 -57 >> legend
 echo 75 -57 >> legend

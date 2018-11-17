@@ -37,7 +37,7 @@ gmt makecpt -C$incpt -T-7000/0/1400 -D -V -F -Z > $cptf
 wysiwyg是GMT自带的CPT，但是需要根据数据范围和作图要求重新配置需要的CPT文件。除了wysiwyg外，大家还可以尝试haxby和globe等GMT自带颜色文件，都是比较适合画地形图的。
 这就是画图需要定义的一部分，我一般会把它们放最前面，调试时候比较好找。以上工作就相当于准备好了画图需要的画板、颜料以及地图的格式和框架，下面的工作就是 just do it！
 
-### 开始画图
+### 开始画图——底图
 ```
 gmt begin $fig_name $fig_fmt 
 ```
@@ -56,10 +56,10 @@ gmt coast -Ggray -A1000
 gmt psscale -C$cptf -Ba2000f1000/:"  Depth (m)": -D4/-0.5/8/0.4h -I # 色卡
 gmt basemap -Lfx15/-0.5/-38/500+u # 比例尺，此处为500km
 ```
-GMT_compleFig_bottom.png
+最终获得的底图如下
+![GMT_compleFig_bottom.png](https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig_bottom.png?token=Ap7MLw4DleSYO9d2ctHV-dhor9exjnGoks5b-R4FwA%3D%3D)
 现在地形图的基本框架已经打好了，可以在此基础上随意添加各种想要的元素。
-### 添加各种点、线、面
-
+### 添加点、线、面
 ```
 # 加线-洋中脊的脊轴和转换断层
 gmt psxy ridge/SWIR.txt  -Wthicker+s 
@@ -79,9 +79,20 @@ gmt psxy SWIR_TF/60.7E_Melville.txt -Wthicker,darkgray+s
 gmt psxy SWIR_TF/RTJ-north-trace.txt -Wthicker,darkgray,4_4_4_4:3p+s  
 gmt psxy SWIR_TF/RTJ-south-trace.txt -Wthicker,darkgray,4_4_4_4:3p+s 
 ```
-```加点-热液活动
+```
+# 加点-热液活动
 gmt psxy hydrothermal/hydrothermal_anomaly.txt -Sc10p -W0.2p,white -Gblue
 gmt psxy hydrothermal/hydrothermal_vent.txt  -Sc10p -W0.2p,white -Gred
+```
+```
+# 加面
+# 随便假设一个研究区域
+echo 43 -40.5 > area
+echo 43 -41.5 >> area
+echo 45 -41.5 >> area
+echo 45 -40.5 >> area
+gmt psxy area -Gred  -L -A
+rm area
 ```
 
 gmt pscoast -R-60/300/-90/90 -JG55/-40/6c -A20000 -W0.1p -Gblack -Swhite -Ba30g -V -Y8.25c
