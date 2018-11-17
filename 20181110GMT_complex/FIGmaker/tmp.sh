@@ -19,7 +19,7 @@ incpt=wysiwyg
 cptf=SWIR.cpt
 gmt makecpt -C$incpt -T-7000/0/1400 -D -V -F -Z > $cptf
 
-gmt begin $fig_name $fig_fmt
+gmt begin $fig_name png,pdf
 gmt grdimage $inf -I$gradf -R$R -J$J -CSWIR.cpt -V -Q -Bx10f5 -Bya10f5 -BWseN
 gmt coast -Sgray -A0 -t70 -V
 gmt psscale -C$cptf -Ba2000f1000/:"  Depth (m)": -D4/-0.5/8/0.4h --MAP_FRAME_PEN=0.5p --MAP_TICK_LENGTH=0.15 --MAP_ANNOT_OFFSET_PRIMARY=0.1  -I -V
@@ -89,4 +89,7 @@ gmt psxy  ridge/slow.txt -W0.5p+s -V
 echo 42 -41| gmt psxy -Sa15p -W0.1p,red -Gred -V
 
 gmt end
-open ${fig_name}.${fig_fmt}
+cp ${PWD}/$fig_name.png /MyData/Research/3-CodeProject/ModernFig/GMT_share/20181110GMT_complex/FIGmaker/gmt_GMT_complex.png
+cp ${PWD}/$fig_name.png /MyData/Research/3-CodeProject/ModernFig/GMT_share/20181110GMT_complex/FIGmaker/gmt_GMT_complex.hires.png
+mv ${PWD}/$fig_name.pdf /MyData/Research/3-CodeProject/ModernFig/GMT_share/20181110GMT_complex/FIGmaker/gmt_GMT_complex.pdf
+rm ${PWD}/$fig_name.png 
