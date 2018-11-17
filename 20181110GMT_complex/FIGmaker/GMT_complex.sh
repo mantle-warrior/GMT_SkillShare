@@ -8,8 +8,8 @@ gmt set MAP_FRAME_TYPE=fancy
 gmt set COLOR_BACKGROUND=white
 gmt set FORMAT_GEO_MAP ddd:mm:ssF
 
-inf=/Users/jiechen/OneDrive/data_project/topo_global/earth_relief_05m.grd
-gradf=/Users/jiechen/OneDrive/data_project/topo_global/grad_relief_05m-0.3.nc
+inf=earth_relief/earth_relief_05m.grd
+gradf=earth_relief/grad_relief_05m-0.3.nc
 gmt grdgradient $inf -A45 -Nt0.3 -fg -G$gradf -V
 
 R=8/75/-57/-21
@@ -52,7 +52,7 @@ echo 45 -41.5 >> area
 echo 45 -40.5 >> area
 gmt psxy area -Gred  -L -A
 rm area
-gmt end
+
 echo 55.5 -51 > legend
 echo 55.5 -57 >> legend
 echo 75 -57 >> legend
@@ -80,13 +80,13 @@ echo 58 -56 | gmt psxy -Sc10p -W0.2p,white -Gred
 echo 59.5 -56 hydrothermal vent | gmt pstext -F+f12+jLM  -D0.3c/0c
 rm legend ridge.legen TF.legend RTJtrace.legend
 
-gmt pscoast -R-60/300/-90/90 -JG55/-40/6c -A20000 -W0.1p -Gblack -Swhite -Ba30g -V -Y8.25c
+gmt coast -R-60/300/-90/90 -JG55/-40/6c -A20000 -W0.1p -Gblack -Swhite -Ba30g -V -Y8.25c
 gmt psxy  ridge/SWIR.txt -W0.5p+s -V
 gmt psxy  ridge/SEIR.txt -W0.5p+s -V
 gmt psxy  ridge/CIR.txt -W0.5p+s -V
 gmt psxy  ridge/AAR.txt -W0.5p+s -V
 gmt psxy  ridge/slow.txt -W0.5p+s -V
-echo 50.1 -37.7| gmt psxy -Sa15p -W0.1p,red -Gred -V
+echo 42 -41| gmt psxy -Sa15p -W0.1p,red -Gred -V
 
 gmt end
 open ${fig_name}.${fig_fmt}

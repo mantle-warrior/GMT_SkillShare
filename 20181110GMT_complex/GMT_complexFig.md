@@ -21,8 +21,8 @@ gmt set FORMAT_GEO_MAP ddd:mm:ssF
 ```
 定义图名和图片格式，自定义部分GMT默认值，分别是字体大小、字体格式、地图的外框、背景颜色和经纬度标注格式
 ```
-inf=earth_relief_05m.grd # 地形网格文件
-gradf=grad_relief_05m.nc # 地形梯度网格文件
+inf=earth_relief/earth_relief_05m.grd # 地形网格文件
+gradf=earth_relief/grad_relief_05m.nc # 地形梯度网格文件
 gmt grdgradient $inf -A45 -Nt0.3 -fg -G$gradf 
 ```
 梯度网格文件的生成，，目的是使底图具有阴影效果。在此强调一下-Nt选项，后面的数字越小，地形越平坦，在图范围较大情况下，建议0.5以下。
@@ -61,7 +61,8 @@ gmt basemap -Lfx15/-0.5/-38/500+u # 比例尺，此处为500km
 现在地形图的基本框架已经打好了，可以在此基础上随意添加各种想要的元素。
 ### 添加点、线、面
 ```
-# 加线-洋中脊的脊轴和转换断层
+# 加线
+# 洋中脊的脊轴和转换断层
 gmt psxy ridge/SWIR.txt  -Wthicker+s 
 gmt psxy ridge/SEIR.txt  -Wthicker+s
 gmt psxy ridge/CIR.txt   -Wthicker+s
@@ -80,7 +81,8 @@ gmt psxy SWIR_TF/RTJ-north-trace.txt -Wthicker,darkgray,4_4_4_4:3p+s
 gmt psxy SWIR_TF/RTJ-south-trace.txt -Wthicker,darkgray,4_4_4_4:3p+s 
 ```
 ```
-# 加点-热液活动
+# 加点
+# 热液活动和热液异常
 gmt psxy hydrothermal/hydrothermal_anomaly.txt -Sc10p -W0.2p,white -Gblue
 gmt psxy hydrothermal/hydrothermal_vent.txt  -Sc10p -W0.2p,white -Gred
 ```
@@ -94,12 +96,50 @@ echo 45 -40.5 >> area
 gmt psxy area -Gred  -L -A
 rm area
 ```
+![GMT_compleFig_add.png](https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig_add.png?token=Ap7ML8TQRK49ODy2SX4XzF90xJC4Ng7pks5b-SETwA%3D%3D)
+画到这，是不是感觉已经大功告成了？并没有~~~~因为这张图一点都不复杂，可以发现图的左上和右下角都是空白。
+### 图例和地理位置图
+画了这么多元素，应当加一些图例以说明，当然也可以在论文中图片下方文字说明，并将之放在右下方。
+```
+echo 55.5 -51 > legend
+echo 55.5 -57 >> legend
+echo 75 -57 >> legend
+echo 75 -51 >> legend
+gmt psxy legend -W1p,black -Gwhite  -L -A
+# 此处建立一个图例边框文件，并绘制
+echo 56.5 -52 > ridge.legend
+echo 59.5 -52 >> ridge.legend
+gmt psxy ridge.legend -Wthicker
+echo 59.5 -52 ridge | gmt pstext -F+f12+jLM  -D0.3c/0c
+# 建立图例文件 并绘制，下同
+echo 56.5 -53 > TF.legend 
+echo 59.5 -53 >> TF.legend
+gmt psxy TF.legend -Wthicker,darkgray
+echo 59.5 -53 transfrom fracture | gmt pstext -F+f12+jLM  -D0.3c/0c
 
-gmt pscoast -R-60/300/-90/90 -JG55/-40/6c -A20000 -W0.1p -Gblack -Swhite -Ba30g -V -Y8.25c
+echo 56.5 -54 > RTJtrace.legend 
+echo 59.5 -54 >> RTJtrace.legend
+gmt psxy RTJtrace.legend -Wthicker,darkgray,4_4_4_4:3p+s 
+echo 59.5 -54 RTJ trace | gmt pstext -F+f12+jLM  -D0.3c/0c
+
+echo 58 -55 | gmt psxy -Sc10p -W0.2p,white -Gblue
+echo 59.5 -55 hydrothermal anomaly | gmt pstext -F+f12+jLM  -D0.3c/0c
+echo 58 -56 | gmt psxy -Sc10p -W0.2p,white -Gred
+echo 59.5 -56 hydrothermal vent | gmt pstext -F+f12+jLM  -D0.3c/0c
+rm legend ridge.legen TF.legend RTJtrace.legend # 删除图例文件
+```
+最后再把地理位置放在左上方。
+```
+gmt coast -R-60/300/-90/90 -JG55/-40/6c -A20000 -W0.1p -Gblack -Swhite -Ba30g -V -Y8.25c
+# 这里需要说明一下，这里的-R和-J和底图不同，但仍可放置在同一张图中，但是需要调整位置（-Y8.25c，其中8.25是试出来的）
 gmt psxy  ridge/SWIR.txt -W0.5p+s -V
 gmt psxy  ridge/SEIR.txt -W0.5p+s -V
 gmt psxy  ridge/CIR.txt -W0.5p+s -V
 gmt psxy  ridge/AAR.txt -W0.5p+s -V
 gmt psxy  ridge/slow.txt -W0.5p+s -V
 echo 50.1 -37.7| gmt psxy -Sa15p -W0.1p,red -Gred -V
+```
+成了！
+
+图例部分不详细讲述，因为一般人不会用GMT直接画，更多人会选择CorelDraw之类的画图软件。
 
