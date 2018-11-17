@@ -1,12 +1,14 @@
 # GMT复杂图制作教程———让作图简单的飞起来
-GMT是地学界常用的开源软件，不仅是因为其开源的特性，还有着独特的魅力。GMT可以对海岸线、地形、投点等进行综合表现，满足我们的学术论文。但是笔者发现，目前仍然缺乏某些特定的GMT画图教程，如本文所要分享的复杂海底地形图。本文适合初学者，也适合具有一定基础的海洋地质地球物理学科专业的同学。
+GMT是地学界常用的开源软件，不仅是因为其开源的特性，还有着独特的魅力。GMT可以对海岸线、地形、投点等进行综合表现，满足我们的学术论文。但是笔者发现，目前仍然缺乏某些特定的GMT画图教程，如本文所要分享的复杂海底地形图（如下图）。本文适合初学者，也适合具有一定基础的海洋地质地球物理学科专业的同学。
 
-## 图层
+![](https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig.png?token=Ap7ML9-0HyIVI1eBSk6qqfSX45H0x8Qqks5b-SXLwA%3D%3D)
+
+## 作图之前的小tips——图层
 GMT的画图是通过图层的不断叠加来实现的，画图者需要做的就是先画出底图，然后在此基础上叠加需要的图层。本文就是以图层顺序的方式进行分享，这样可以对图层进行随意删减或者改变顺序。需要说明的是，本文所写的代码使用Mac下最新版本的软件GMT6
 
 GMT6的[安装]åscholar.coding.me/2018/10/22/post_19/")、详细模块讲解请参照[GMT官网]("http://gmt.soest.hawaii.edu/doc/5.4.4/index.html")或者[GMT中文网]("https://gmt-china.org/")。
 
-闲话少说，下面就开始了！
+闲话少说，Let's start！
 
 ### 准备工作
 ```
@@ -57,7 +59,9 @@ gmt psscale -C$cptf -Ba2000f1000/:"  Depth (m)": -D4/-0.5/8/0.4h -I # 色卡
 gmt basemap -Lfx15/-0.5/-38/500+u # 比例尺，此处为500km
 ```
 最终获得的底图如下
-![GMT_compleFig_bottom.png](https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig_bottom.png?token=Ap7MLw4DleSYO9d2ctHV-dhor9exjnGoks5b-R4FwA%3D%3D)
+
+![](https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig_bottom.png?token=Ap7MLw4DleSYO9d2ctHV-dhor9exjnGoks5b-R4FwA%3D%3D)
+
 现在地形图的基本框架已经打好了，可以在此基础上随意添加各种想要的元素。
 ### 添加点、线、面
 ```
@@ -96,7 +100,9 @@ echo 45 -40.5 >> area
 gmt psxy area -Gred  -L -A
 rm area
 ```
-![GMT_compleFig_add.png](https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig_add.png?token=Ap7ML8TQRK49ODy2SX4XzF90xJC4Ng7pks5b-SETwA%3D%3D)
+
+![](https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig_add.png?token=Ap7ML8TQRK49ODy2SX4XzF90xJC4Ng7pks5b-SETwA%3D%3D)
+
 画到这，是不是感觉已经大功告成了？并没有~~~~因为这张图一点都不复杂，可以发现图的左上和右下角都是空白。
 ### 图例和地理位置图
 画了这么多元素，应当加一些图例以说明，当然也可以在论文中图片下方文字说明，并将之放在右下方。
@@ -139,8 +145,13 @@ gmt psxy  ridge/AAR.txt -W0.5p+s -V
 gmt psxy  ridge/slow.txt -W0.5p+s -V
 echo 50.1 -37.7| gmt psxy -Sa15p -W0.1p,red -Gred -V
 ```
-成了！
-![GMT_compleFig_add.png](https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig.png?token=Ap7ML9-0HyIVI1eBSk6qqfSX45H0x8Qqks5b-SXLwA%3D%3D)
+成了！但是别忘了最后加上
+```
+gmt end
+```
+
+![](https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig.png?token=Ap7ML9-0HyIVI1eBSk6qqfSX45H0x8Qqks5b-SXLwA%3D%3D)
+
 图例部分就不详细讲述了，因为一般人不会用GMT直接画，更多人会选择CorelDraw之类的画图软件。
 
 
