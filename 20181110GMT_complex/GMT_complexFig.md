@@ -45,7 +45,7 @@ gmt begin $fig_name $fig_fmt
 ```
 首先是gmt begin，这是GMT6的代码风格，后面还会看到更多与GMT5不同的地方
 ```
-gmt grdimage $inf -I$gradf -R$R -J$J -CGMT_complexFig.cpt -Bx10f5 -Bya10f5 
+gmt grdimage $inf -I$gradf -R$R -J$J -C$cptf -Bx10f5 -Bya10f5 
 -BWseN 
 ```
 这是底图，可以说是很简单了吧？
