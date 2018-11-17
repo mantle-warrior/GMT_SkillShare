@@ -62,7 +62,7 @@ gmt basemap -Lfx15/-0.5/-38/500+u # 比例尺，此处为500km
 ### 添加点、线、面
 ```
 # 加线
-# 洋中脊的脊轴和转换断层
+# 洋中脊的脊轴、转换断层和构造线
 gmt psxy ridge/SWIR.txt  -Wthicker+s 
 gmt psxy ridge/SEIR.txt  -Wthicker+s
 gmt psxy ridge/CIR.txt   -Wthicker+s
@@ -140,6 +140,7 @@ gmt psxy  ridge/slow.txt -W0.5p+s -V
 echo 50.1 -37.7| gmt psxy -Sa15p -W0.1p,red -Gred -V
 ```
 成了！
+![GMT_compleFig_add.png](https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig.png?token=Ap7ML9-0HyIVI1eBSk6qqfSX45H0x8Qqks5b-SXLwA%3D%3D)
+图例部分就不详细讲述了，因为一般人不会用GMT直接画，更多人会选择CorelDraw之类的画图软件。
 
-图例部分不详细讲述，因为一般人不会用GMT直接画，更多人会选择CorelDraw之类的画图软件。
 
