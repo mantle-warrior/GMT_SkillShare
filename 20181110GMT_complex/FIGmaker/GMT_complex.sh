@@ -1,7 +1,6 @@
 #!/bin/bash
 fig_name=GMT_compleFig
 fig_fmt=png
-gmt begin $fig_name $fig_fmt
 
 gmt set FONT_ANNOT_PRIMARY=12
 gmt set FONT_ANNOT_PRIMARY=times-roman
@@ -13,17 +12,20 @@ inf=/Users/jiechen/OneDrive/data_project/topo_global/earth_relief_05m.grd
 gradf=/Users/jiechen/OneDrive/data_project/topo_global/grad_relief_05m-0.3.nc
 gmt grdgradient $inf -A45 -Nt0.3 -fg -G$gradf -V
 
+R=8/75/-57/-21
+J=M20c
+
 incpt=wysiwyg
 cptf=SWIR.cpt
 gmt makecpt -C$incpt -T-7000/0/1400 -D -V -F -Z > $cptf
 
-R=8/75/-57/-21
-J=M20c
+gmt begin $fig_name $fig_fmt
 gmt grdimage $inf -I$gradf -R$R -J$J -CSWIR.cpt -V -Q -Bx10f5 -Bya10f5 -BWseN
 gmt coast -Sgray -A0 -t70 -V
 gmt psscale -C$cptf -Ba2000f1000/:"  Depth (m)": -D4/-0.5/8/0.4h --MAP_FRAME_PEN=0.5p --MAP_TICK_LENGTH=0.15 --MAP_ANNOT_OFFSET_PRIMARY=0.1  -I -V
 gmt basemap -Lfx15/-0.5/-38/500+u  -V
 gmt coast -Ggray -A1000 
+gmt end 
 
 gmt psxy ridge/SWIR.txt  -Wthicker+s
 gmt psxy ridge/SEIR.txt  -Wthicker+s
