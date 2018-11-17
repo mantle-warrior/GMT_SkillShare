@@ -16,7 +16,7 @@ R=8/75/-57/-21
 J=M20c
 
 incpt=wysiwyg
-cptf=SWIR.cpt
+cptf=GMT_complexFig.cpt
 gmt makecpt -C$incpt -T-7000/0/1400 -D -V -F -Z > $cptf
 
 gmt begin $fig_name $fig_fmt
