@@ -14,7 +14,7 @@ gmt grdgradient $inf -A45 -Nt0.3 -fg -G$gradf -V
 
 R=8/75/-57/-21
 J=M20c
-
+         
 incpt=wysiwyg
 cptf=GMT_complexFig.cpt
 gmt makecpt -C$incpt -T-7000/0/1400 -D -V -F -Z > $cptf
@@ -89,4 +89,4 @@ gmt psxy  ridge/slow.txt -W0.5p+s -V
 echo 42 -41| gmt psxy -Sa15p -W0.1p,red -Gred -V
 
 gmt end
-open ${fig_name}.${fig_fmt}
+open ${fig_name}.${fig_fmt} 
