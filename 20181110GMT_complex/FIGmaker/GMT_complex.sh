@@ -1,6 +1,6 @@
 #!/bin/bash
 fig_name=GMT_compleFig
-fig_fmt=png
+fig_fmt=pdf
 
 gmt set FONT_ANNOT_PRIMARY=12
 gmt set FONT_ANNOT_PRIMARY=times-roman

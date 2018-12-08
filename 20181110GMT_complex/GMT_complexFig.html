@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GMT_complexFig.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="gmt%E5%A4%8D%E6%9D%82%E5%9B%BE%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94%E2%80%94%E8%AE%A9%E4%BD%9C%E5%9B%BE%E7%AE%80%E5%8D%95%E7%9A%84%E9%A3%9E%E8%B5%B7%E6%9D%A5">GMT复杂图制作教程———让作图简单的飞起来</h1>
+<p>GMT是地学界常用的开源软件，不仅是因为其开源的特性，还有着独特的魅力。GMT可以对海岸线、地形、投点等进行综合表现，满足我们的学术论文。但是笔者发现，目前仍然缺乏某些特定的GMT画图教程，如本文所要分享的复杂海底地形图（如下图）。本文适合初学者，也适合具有一定基础的海洋地质地球物理学科专业的同学。</p>
+<p><img src="https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig.png?token=Ap7ML9-0HyIVI1eBSk6qqfSX45H0x8Qqks5b-SXLwA==" alt=""></p>
+<h2 id="%E4%BD%9C%E5%9B%BE%E4%B9%8B%E5%89%8D%E7%9A%84%E5%B0%8Ftips%E2%80%94%E2%80%94%E5%9B%BE%E5%B1%82">作图之前的小tips——图层</h2>
+<p>GMT的画图是通过图层的不断叠加来实现的，画图者需要做的就是先画出底图，然后在此基础上叠加需要的图层。本文就是以图层顺序的方式进行分享，这样可以对图层进行随意删减或者改变顺序。需要说明的是，本文所写的代码使用Mac下最新版本的软件GMT6</p>
+<p>GMT6的[安装]åscholar.coding.me/2018/10/22/post_19/&quot;)、详细模块讲解请参照<a href="%22http://gmt.soest.hawaii.edu/doc/5.4.4/index.html%22">GMT官网</a>或者<a href="%22https://gmt-china.org/%22">GMT中文网</a>。</p>
+<p>闲话少说，Let's start！</p>
+<h3 id="%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C">准备工作</h3>
+<pre class="hljs"><code><div>#!/bin/bash
+fig_name=GMT_complexFig
+fig_fmt=png
+gmt set FONT_ANNOT_PRIMARY=12
+gmt set FONT_ANNOT_PRIMARY=times-roman
+gmt set MAP_FRAME_TYPE=fancy
+gmt set COLOR_BACKGROUND=white
+gmt set FORMAT_GEO_MAP ddd:mm:ssF
+</div></code></pre>
+<p>定义图名和图片格式，自定义部分GMT默认值，分别是字体大小、字体格式、地图的外框、背景颜色和经纬度标注格式</p>
+<pre class="hljs"><code><div>inf=earth_relief/earth_relief_05m.grd # 地形网格文件
+gradf=earth_relief/grad_relief_05m.nc # 地形梯度网格文件
+gmt grdgradient $inf -A45 -Nt0.3 -fg -G$gradf 
+</div></code></pre>
+<p>梯度网格文件的生成，，目的是使底图具有阴影效果。在此强调一下-Nt选项，后面的数字越小，地形越平坦，在图范围较大情况下，建议0.5以下。</p>
+<pre class="hljs"><code><div>R=8/75/-57/-21 #图的经纬度范围
+J=M20c #墨卡托投影
+# 以下三行为生成CPT颜色文件的代码
+incpt=wysiwyg
+cptf=GMT_complexFig.cpt
+gmt makecpt -C$incpt -T-7000/0/1400 -D -V -F -Z &gt; $cptf
+</div></code></pre>
+<p>wysiwyg是GMT自带的CPT，但是需要根据数据范围和作图要求重新配置需要的CPT文件。除了wysiwyg外，大家还可以尝试haxby和globe等GMT自带颜色文件，都是比较适合画地形图的。
+这就是画图需要定义的一部分，我一般会把它们放最前面，调试时候比较好找。以上工作就相当于准备好了画图需要的画板、颜料以及地图的格式和框架，下面的工作就是 just do it！</p>
+<h3 id="%E5%BC%80%E5%A7%8B%E7%94%BB%E5%9B%BE%E2%80%94%E2%80%94%E5%BA%95%E5%9B%BE">开始画图——底图</h3>
+<pre class="hljs"><code><div>gmt begin $fig_name $fig_fmt 
+</div></code></pre>
+<p>首先是gmt begin，这是GMT6的代码风格，后面还会看到更多与GMT5不同的地方</p>
+<pre class="hljs"><code><div>gmt grdimage $inf -I$gradf -R$R -J$J -C$cptf -Bx10f5 -Bya10f5 
+-BWseN 
+</div></code></pre>
+<p>这是底图，可以说是很简单了吧？</p>
+<pre class="hljs"><code><div>gmt coast -Sgray -A0 -t70 -V 
+gmt coast -Ggray -A1000
+</div></code></pre>
+<p>看到这里是不是很纳闷为什么要用两次海岸线模块？第一行对底图本身没有添加任何线条，但是加上后会让图变得高级，本质上是在底图之上加了一层70%（可随意调整）透明的灰色（即高级灰）。底图就成了传说中的“莫兰迪色”，常用于各种家居设计以及《延禧攻略》。第二行为普通的海岸线模块，将陆地填充灰色。</p>
+<pre class="hljs"><code><div>gmt psscale -C$cptf -Ba2000f1000/:&quot;  Depth (m)&quot;: -D4/-0.5/8/0.4h -I # 色卡
+gmt basemap -Lfx15/-0.5/-38/500+u # 比例尺，此处为500km
+</div></code></pre>
+<p>最终获得的底图如下</p>
+<p><img src="https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig_bottom.png?token=Ap7MLw4DleSYO9d2ctHV-dhor9exjnGoks5b-R4FwA==" alt=""></p>
+<p>现在地形图的基本框架已经打好了，可以在此基础上随意添加各种想要的元素。</p>
+<h3 id="%E6%B7%BB%E5%8A%A0%E7%82%B9%E3%80%81%E7%BA%BF%E3%80%81%E9%9D%A2">添加点、线、面</h3>
+<pre class="hljs"><code><div># 加线
+# 洋中脊的脊轴、转换断层和构造线
+gmt psxy ridge/SWIR.txt  -Wthicker+s 
+gmt psxy ridge/SEIR.txt  -Wthicker+s
+gmt psxy ridge/CIR.txt   -Wthicker+s
+gmt psxy SWIR_TF/10E_Shaka.txt -Wthicker,darkgray+s 
+gmt psxy SWIR_TF/25E_Du_Toit.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/32.4E_Andrew_Bain.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/33.9E_Marion.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/35.2E_Prince_Edward.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/39.3E_Eric_Simpson.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/40.7E_Discovery2.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/46.1E_Indomed.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/52.3EGallieni.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/57E_Atlantis2.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/60.7E_Melville.txt -Wthicker,darkgray+s  
+gmt psxy SWIR_TF/RTJ-north-trace.txt -Wthicker,darkgray,4_4_4_4:3p+s  
+gmt psxy SWIR_TF/RTJ-south-trace.txt -Wthicker,darkgray,4_4_4_4:3p+s 
+</div></code></pre>
+<pre class="hljs"><code><div># 加点
+# 热液活动和热液异常
+gmt psxy hydrothermal/hydrothermal_anomaly.txt -Sc10p -W0.2p,white -Gblue
+gmt psxy hydrothermal/hydrothermal_vent.txt  -Sc10p -W0.2p,white -Gred
+</div></code></pre>
+<pre class="hljs"><code><div># 加面
+# 随便假设一个研究区域
+echo 43 -40.5 &gt; area
+echo 43 -41.5 &gt;&gt; area
+echo 45 -41.5 &gt;&gt; area
+echo 45 -40.5 &gt;&gt; area
+gmt psxy area -Gred  -L -A
+rm area
+</div></code></pre>
+<p><img src="https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig_add.png?token=Ap7ML8TQRK49ODy2SX4XzF90xJC4Ng7pks5b-SETwA==" alt=""></p>
+<p>画到这，是不是感觉已经大功告成了？并没有~~~~因为这张图一点都不复杂，可以发现图的左上和右下角都是空白。</p>
+<h3 id="%E5%9B%BE%E4%BE%8B%E5%92%8C%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE%E5%9B%BE">图例和地理位置图</h3>
+<p>画了这么多元素，应当加一些图例以说明，当然也可以在论文中图片下方文字说明，并将之放在右下方。</p>
+<pre class="hljs"><code><div>echo 55.5 -51 &gt; legend
+echo 55.5 -57 &gt;&gt; legend
+echo 75 -57 &gt;&gt; legend
+echo 75 -51 &gt;&gt; legend
+gmt psxy legend -W1p,black -Gwhite  -L -A
+# 此处建立一个图例边框文件，并绘制
+echo 56.5 -52 &gt; ridge.legend
+echo 59.5 -52 &gt;&gt; ridge.legend
+gmt psxy ridge.legend -Wthicker
+echo 59.5 -52 ridge | gmt pstext -F+f12+jLM  -D0.3c/0c
+# 建立图例文件 并绘制，下同
+echo 56.5 -53 &gt; TF.legend 
+echo 59.5 -53 &gt;&gt; TF.legend
+gmt psxy TF.legend -Wthicker,darkgray
+echo 59.5 -53 transfrom fracture | gmt pstext -F+f12+jLM  -D0.3c/0c
+
+echo 56.5 -54 &gt; RTJtrace.legend 
+echo 59.5 -54 &gt;&gt; RTJtrace.legend
+gmt psxy RTJtrace.legend -Wthicker,darkgray,4_4_4_4:3p+s 
+echo 59.5 -54 RTJ trace | gmt pstext -F+f12+jLM  -D0.3c/0c
+
+echo 58 -55 | gmt psxy -Sc10p -W0.2p,white -Gblue
+echo 59.5 -55 hydrothermal anomaly | gmt pstext -F+f12+jLM  -D0.3c/0c
+echo 58 -56 | gmt psxy -Sc10p -W0.2p,white -Gred
+echo 59.5 -56 hydrothermal vent | gmt pstext -F+f12+jLM  -D0.3c/0c
+rm legend ridge.legen TF.legend RTJtrace.legend # 删除图例文件
+</div></code></pre>
+<p>最后再把地理位置放在左上方。</p>
+<pre class="hljs"><code><div>gmt coast -R-60/300/-90/90 -JG55/-40/6c -A20000 -W0.1p -Gblack -Swhite -Ba30g -V -Y8.25c
+# 这里需要说明一下，这里的-R和-J和底图不同，但仍可放置在同一张图中，但是需要调整位置（-Y8.25c，其中8.25是试出来的）
+gmt psxy  ridge/SWIR.txt -W0.5p+s -V
+gmt psxy  ridge/SEIR.txt -W0.5p+s -V
+gmt psxy  ridge/CIR.txt -W0.5p+s -V
+gmt psxy  ridge/AAR.txt -W0.5p+s -V
+gmt psxy  ridge/slow.txt -W0.5p+s -V
+echo 50.1 -37.7| gmt psxy -Sa15p -W0.1p,red -Gred -V
+</div></code></pre>
+<p>成了！但是别忘了最后加上</p>
+<pre class="hljs"><code><div>gmt end
+</div></code></pre>
+<p><img src="https://raw.githubusercontent.com/mantle-754/GMT_share/master/20181110GMT_complex/FIGmaker/GMT_compleFig.png?token=Ap7ML9-0HyIVI1eBSk6qqfSX45H0x8Qqks5b-SXLwA==" alt=""></p>
+<p>图例部分就不详细讲述了，因为一般人不会用GMT直接画，更多人会选择CorelDraw之类的画图软件。</p>
+
+</body>
+</html>
