@@ -2,7 +2,7 @@
 
 GMT has a lot of tests to create a map, including almost all of the modules, [see details]("https://github.com/GenericMappingTools/gmt/tree/master/test"). Here, I made some summaries to create a map legend by 'pslegend'. Note that my GMT version is gmt6, with more simple codes than that of gmt5.
 
-### Code
+### Code&Figure
 ```
 fig_name=MYlegend
 fig_fmt=jpg 
@@ -29,10 +29,8 @@ gmt end
 #-F+p(frame1)+i(frame2)+g[background color]
 ```
 
+![](https://github.com/mantle-warrior/GMT_SkillShare/blob/master/20190520GMT_legend/MYlegend.jpg?raw=true)
+
 [read more or download the full script]("https://github.com/mantle-warrior/GMT_SkillShare/tree/master/20190520GMT_legend")
-
-
-
-
 
 
