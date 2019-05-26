@@ -1,4 +1,4 @@
-## How to create a legned in GMT
+## How to create a map legned in GMT
 
 GMT has a lot of tests to create a map, including almost all of the modules, [see details]("https://github.com/GenericMappingTools/gmt/tree/master/test"). Here, I made some summaries to create a map legend by 'pslegend'. Note that my GMT version is gmt6, with more simple codes than that of gmt5.
 
